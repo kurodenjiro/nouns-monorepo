@@ -29,6 +29,7 @@ import pastAuctions, { addPastAuctions } from './state/slices/pastAuctions';
 import LogsUpdater from './state/updaters/logs';
 import config, {
   CHAIN_ID,
+  ChainId_Base,
   ChainId_Sepolia,
   createNetworkHttpUrl,
   multicallOnLocalhost,
@@ -89,6 +90,7 @@ const supportedChainURLs = {
   [ChainId.Hardhat]: 'http://localhost:8545',
   [ChainId.Goerli]: createNetworkHttpUrl('goerli'),
   [ChainId_Sepolia]: createNetworkHttpUrl('sepolia'),
+  [ChainId_Base]: createNetworkHttpUrl('base'),
 };
 
 export const Sepolia: Chain = {
@@ -101,7 +103,16 @@ export const Sepolia: Chain = {
   getExplorerTransactionLink: (transactionHash: string) =>
     `https://sepolia.etherscan.io/tx/${transactionHash}`,
 };
-
+export const Base: Chain = {
+  chainId: 8453,
+  chainName: 'Base',
+  isTestChain: true,
+  isLocalChain: false,
+  multicallAddress: '0x6a19Dbfc67233760E0fF235b29158bE45Cc53765',
+  getExplorerAddressLink: (address: string) => `https://https://basescan.org/address/${address}`,
+  getExplorerTransactionLink: (transactionHash: string) =>
+    `https://https://basescan.org/tx/${transactionHash}`,
+};
 // prettier-ignore
 const useDappConfig = {
   readOnlyChainId: CHAIN_ID,

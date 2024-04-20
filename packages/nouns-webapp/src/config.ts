@@ -25,7 +25,8 @@ interface AppConfig {
 }
 
 export const ChainId_Sepolia = 11155111;
-type SupportedChains = ChainId.Mainnet | ChainId.Hardhat | ChainId.Goerli | typeof ChainId_Sepolia;
+export const ChainId_Base = 8453;
+type SupportedChains = ChainId.Mainnet | ChainId.Hardhat | ChainId.Goerli | typeof ChainId_Sepolia | typeof ChainId_Base;
 
 interface CacheBucket {
   name: string;
@@ -74,9 +75,17 @@ const app: Record<SupportedChains, AppConfig> = {
       'https://api.goldsky.com/api/public/project_cldf2o9pqagp43svvbk5u3kmo/subgraphs/nouns-v3-goerli/0.1.6/gn',
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
   },
+  
   [ChainId_Sepolia]: {
     jsonRpcUri: createNetworkHttpUrl('sepolia'),
     wsRpcUri: createNetworkWsUrl('sepolia'),
+    subgraphApiUri:
+      'https://api.goldsky.com/api/public/project_cldf2o9pqagp43svvbk5u3kmo/subgraphs/nouns-sepolia-the-burn/0.1.0/gn',
+    enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
+  },
+  [ChainId_Base]: {
+    jsonRpcUri: createNetworkHttpUrl('base'),
+    wsRpcUri: createNetworkWsUrl('base'),
     subgraphApiUri:
       'https://api.goldsky.com/api/public/project_cldf2o9pqagp43svvbk5u3kmo/subgraphs/nouns-sepolia-the-burn/0.1.0/gn',
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
@@ -115,6 +124,16 @@ const externalAddresses: Record<SupportedChains, ExternalContractAddresses> = {
     payerContract: '0x5a2A0951C6b3479DBEe1D5909Aac7B325d300D94',
     tokenBuyer: '0x821176470cFeF1dB78F1e2dbae136f73c36ddd48',
     chainlinkEthUsdc: '0x694AA1769357215DE4FAC081bf1f309aDC325306',
+    nounsStreamFactory: '0xb78ccF3BD015f209fb9B2d3d132FD8784Df78DF5',
+  },
+  [ChainId_Base]: {
+    lidoToken: undefined,
+    usdcToken: '0x833589fcd6edb6e08f4c7c32d4f71b54bda02913',
+    weth: '0x4200000000000000000000000000000000000006',
+    steth: undefined,
+    payerContract: '0x5a2A0951C6b3479DBEe1D5909Aac7B325d300D94',
+    tokenBuyer: '0x821176470cFeF1dB78F1e2dbae136f73c36ddd48',
+    chainlinkEthUsdc: undefined,
     nounsStreamFactory: '0xb78ccF3BD015f209fb9B2d3d132FD8784Df78DF5',
   },
   [ChainId.Mainnet]: {
