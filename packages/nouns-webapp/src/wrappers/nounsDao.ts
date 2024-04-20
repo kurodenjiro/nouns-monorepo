@@ -1316,7 +1316,6 @@ export const useLastMinuteWindowInBlocks = (): number | undefined => {
   return lastMinuteWindowInBlocks?.toNumber();
 };
 
-
 export const useUpdatableProposalIds = (blockNumber: number) => {
   const {
     loading,
